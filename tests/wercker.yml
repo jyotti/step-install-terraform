@@ -7,9 +7,16 @@ build:
         packages: unzip
         clear-cache: false
     - script:
-        name: test
+        name: test specific version
         code: |
           export WERCKER_INSTALL_TERRAFORM_VERSION=0.8.6
+          export WERCKER_INSTALL_TERRAFORM_USE_CACHE="true"
+          bash ./run.sh
+          terraform version
+    - script:
+        name: test current version
+        code: |
+          export WERCKER_INSTALL_TERRAFORM_VERSION=current
           export WERCKER_INSTALL_TERRAFORM_USE_CACHE="true"
           bash ./run.sh
           terraform version
